@@ -1,0 +1,61 @@
+@using NonFactors.Mvc.Grid;
+@model IEnumerable<HiMVC.ViewModels.Domain.StudentModel>
+
+@{
+    ViewData["Title"] = "StudentList";
+}
+
+<h2>Student List</h2>
+
+<p>
+    <a asp-action="Student">Create New</a>
+</p>
+<table class="table">
+    <tr>
+        <th>
+            @Html.DisplayNameFor(model => model.NewName)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Age)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Sex)
+        </th>
+        <th></th>
+    </tr>
+    
+@foreach (var item in Model) {
+    <tr>
+        <td>
+            @Html.DisplayFor(modelItem => item.NewName)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.Age)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.Sex)
+        </td>
+        <td>
+            <a asp-action="Edit" asp-route-id="@item.StudentId">Edit</a> |
+            <a asp-action="Details" asp-route-id="@item.StudentId">Details</a> |
+            <a asp-action="Delete" asp-route-id="@item.StudentId">Delete</a>
+        </td>
+    </tr>
+}
+</table>
+
+@*
+
+    @(Html
+        .Grid(Model)
+        .Build(columns =>
+        {
+            columns.Add(model => model.NewName).Titled("Name");
+            columns.Add(model => model.Age).Titled("Age");
+
+            columns.Add(model => model.Sex).Titled("Sex");
+        })
+        .Filterable()
+        .Sortable()
+    )
+*@
