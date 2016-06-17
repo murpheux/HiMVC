@@ -14,6 +14,10 @@ namespace BellagioService.Service.v1.Controllers
     //[RequireHttps, ServiceAuthorize, ActivityLog]
     public class ServiceController : BaseController
     {
+        public ServiceController() : base(null, null)
+        {
+
+        }
 
         #region Services
         //

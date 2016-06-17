@@ -1,4 +1,6 @@
-﻿using Microsoft.AspNet.Mvc;
+﻿using HiMVC.Models.Interfaces;
+using Microsoft.AspNet.Mvc;
+using Microsoft.Extensions.Logging;
 
 namespace HiMVC.Controllers
 {
@@ -6,29 +8,15 @@ namespace HiMVC.Controllers
     public partial class BaseController : Controller 
     {
         protected readonly IRepository _repository;
-        //protected readonly Services.Logging.ILogger _logger;
+        protected readonly ILogger _logger;
 
-        public BaseController() 
-        {
-
-            _repository = new Repository(); ;// container.Resolve<IRepository>();
-            //_logger = new NLogLogger(); // container.Resolve<NLogLogger>();
-        }
-
-        public BaseController(IRepository repository)
+        public BaseController(IRepository repository, ILoggerFactory loggerFactory)
         {
             _repository = repository;
+            _logger = loggerFactory.CreateLogger<HomeController>();
         }
 
         protected const int PageSize = 20;
-
-        #region BaseServices
-
-        
-
-        #endregion
-
-        
 
     }
 }

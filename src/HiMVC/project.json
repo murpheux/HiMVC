@@ -6,7 +6,7 @@
   },
 
   "dependencies": {
-    "angularjs": "1.5.5",
+    "angularjs": "1.5.6",
     "AutoMapper": "4.2.1",
     "elmah.corelibrary": "1.2.2",
     "Elmah.Mvc": "2.1.2",
@@ -22,6 +22,7 @@
     "Microsoft.AspNet.Mvc": "6.0.0-rc1-final",
     "Microsoft.AspNet.Mvc.TagHelpers": "6.0.0-rc1-final",
     "Microsoft.AspNet.Server.Kestrel": "1.0.0-rc1-final",
+    "Microsoft.AspNet.SignalR": "2.2.0",
     "Microsoft.AspNet.StaticFiles": "1.0.0-rc1-final",
     "Microsoft.AspNet.Tooling.Razor": "1.0.0-rc1-final",
     "Microsoft.Extensions.CodeGenerators.Mvc": "1.0.0-rc1-final",
@@ -32,25 +33,35 @@
     "Microsoft.Extensions.Logging.Console": "1.0.0-rc1-final",
     "Microsoft.Extensions.Logging.Debug": "1.0.0-rc1-final",
     "Microsoft.VisualStudio.Web.BrowserLink.Loader": "14.0.0-rc1-final",
+    "mongocsharpdriver": "2.2.4",
     "NonFactors.Grid.Mvc6": "0.9.0-rc1-final",
-    "SimpleInjector": "3.1.4",
-    "SimpleInjector.Integration.Web": "3.1.4",
-    "SimpleInjector.Integration.Web.Mvc": "3.1.4"
+    "ServiceStack.Redis": "4.0.60",
+    "SimpleInjector": "3.1.5",
+    "SimpleInjector.Integration.Web": "3.1.5",
+    "SimpleInjector.Integration.Web.Mvc": "3.1.5"
   },
 
   "commands": {
     "web": "Microsoft.AspNet.Server.Kestrel",
+    "webProd": "Microsoft.AspNet.Server.Kestrel --config prod.json",
     "ef": "EntityFramework.Commands"
   },
 
   "frameworks": {
-    "dnx451": {
+    "dnx452": {
       "dependencies": {
       },
       "frameworkAssemblies": {
         "System.configuration": "4.0.0.0",
         "System.Net": "4.0.0.0"
       }
+    }
+  },
+
+  "tools": {
+    "Microsoft.Extensions.SecretManager.Tools": {
+      "version": "1.0.0-preview1-final",
+      "imports": "portable-net45+win8+dnxcore50"
     }
   },
 

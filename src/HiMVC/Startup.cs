@@ -1,7 +1,4 @@
-﻿//using System;
-//using System.Collections.Generic;
-//using System.Linq;
-//using System.Threading.Tasks;
+﻿
 using Microsoft.AspNet.Builder;
 using Microsoft.AspNet.Hosting;
 using Microsoft.AspNet.Identity.EntityFramework;
@@ -12,11 +9,16 @@ using Microsoft.Extensions.Logging;
 using HiMVC.Models;
 using HiMVC.Services;
 using AutoMapper;
-using HiMVC.ViewModels.Domain;
+using NonFactors.Mvc.Grid;
+using Microsoft.AspNet.Mvc;
 using SimpleInjector;
 using SimpleInjector.Integration.Web.Mvc;
-using System.Configuration;
-using NonFactors.Mvc.Grid;
+using HiMVC.Models.Domain;
+using HiMVC.ViewModels;
+using HiMVC.Models.Interfaces;
+using HiMVC.Models.Repository;
+using HiMVC.Data;
+//using Microsoft.AspNetCore.Mvc.Formatters.Xml;
 
 namespace HiMVC
 {
@@ -43,7 +45,9 @@ namespace HiMVC
 
     }
 
-    public static class RepoConfig
+
+    //  not used in this project. This is SimpleInject config for DI
+    public static class DIConfiguration
     {
 
         public static void PrepRepository()
@@ -79,11 +83,13 @@ namespace HiMVC
 
             builder.AddEnvironmentVariables();
             Configuration = builder.Build();
+            Startup.ConfigurationStatic = Configuration;//TODO: refactor; used to pass config to DataContext. There should be a better way
 
             MappingConfig.RegisterMaps();
         }
 
         public IConfigurationRoot Configuration { get; set; }
+        public static IConfigurationRoot ConfigurationStatic { get; set; } //TODO: refactor
 
         // This method gets called by the runtime. Use this method to add services to the container.
         public void ConfigureServices(IServiceCollection services)
@@ -93,7 +99,7 @@ namespace HiMVC
 
             services.AddEntityFramework()
                 .AddSqlServer()
-                .AddDbContext<ApplicationDbContext>(options =>
+                .AddDbContext<DataContext>(options =>
                     options.UseSqlServer(Configuration["Data:DefaultConnection:ConnectionString"]));
 
             services.AddIdentity<ApplicationUser, IdentityRole>()
@@ -103,9 +109,21 @@ namespace HiMVC
             services.AddMvc();
             services.AddMvcGrid();
 
+
+            //configure MVC - mine
+            services.Configure<MvcOptions>(options =>
+            {
+                options.MaxModelValidationErrors = 50;
+            });
+
             // Add application services.
+            services.Configure<AppKeyConfig>(Configuration.GetSection("AppKeys"));// for user secrets
+
             services.AddTransient<IEmailSender, AuthMessageSender>();
             services.AddTransient<ISmsSender, AuthMessageSender>();
+            services.AddScoped<IRepository, Repository>();
+            services.AddScoped<ICache, CacheServices >();
+            //services.AddTransient<ILogger, Logger>();
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
@@ -132,7 +150,7 @@ namespace HiMVC
                     using (var serviceScope = app.ApplicationServices.GetRequiredService<IServiceScopeFactory>()
                         .CreateScope())
                     {
-                        serviceScope.ServiceProvider.GetService<ApplicationDbContext>()
+                        serviceScope.ServiceProvider.GetService<DataContext>()
                              .Database.Migrate();
                     }
                 }
@@ -148,7 +166,6 @@ namespace HiMVC
             app.UseIdentity();
 
             //app.UseWelcomePage();
-            //app.UseDeveloperExceptionPage();
 
             // To configure external authentication please see http://go.microsoft.com/fwlink/?LinkID=532715
 
@@ -158,6 +175,10 @@ namespace HiMVC
                     name: "default",
                     template: "{controller=Home}/{action=Index}/{id?}");
             });
+
+
+            // intitiaize database witht data
+            SeedData.Initialize(app.ApplicationServices);
         }
 
         // Entry point for the application.
