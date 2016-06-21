@@ -1,0 +1,21 @@
+﻿using System;
+using System.Collections.Generic;
+using System.ComponentModel.DataAnnotations;
+using System.ComponentModel.DataAnnotations.Schema;
+using System.Linq;
+using System.Threading.Tasks;
+
+namespace HiMVC.Models.Domain
+{
+    public class Author
+    {
+        [Key, DatabaseGenerated(DatabaseGeneratedOption.Identity)]
+        public int AuthorID { get; set; }
+
+        [Display(Name = "Last Name")]
+        public string LastName { get; set; }
+
+        [Display(Name = "First Name")]
+        public string FirstName { get; set; }
+    }
+}

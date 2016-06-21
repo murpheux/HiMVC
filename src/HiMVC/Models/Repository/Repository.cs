@@ -5,6 +5,7 @@ using Microsoft.Data.Entity;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
+using System;
 
 namespace HiMVC.Models.Repository
 {
@@ -25,14 +26,32 @@ namespace HiMVC.Models.Repository
             await _context.SaveChangesAsync();
         }
 
+        public async Task<IEnumerable<Lecturer>> GetAllLecturersAsync()
+        {
+            var data = _context.Lecturers.Select(p => new Lecturer()
+            {
+                LecturerId = p.LecturerId,
+                FirstName = p.FirstName,
+                LastName = p.LastName,
+                Title = p.Title,
+                Rating = p.Rating,
+            });
+
+            return await data.ToArrayAsync();
+        }
+
         public async Task<IEnumerable<Student>> GetAllStudentsAsync()
         {
             var data = _context.Students.Select(p => new Student()
             {
                 StudentId = p.StudentId,
-                Name = p.Name,
-                Age = p.Age,
-                Sex = p.Sex
+                FirstName = p.FirstName,
+                LastName = p.LastName,
+                Email = p.Email,
+                DateOfBirth = p.DateOfBirth,
+                Sex = p.Sex,
+                GPA = p.GPA,
+                Nationality = p.Nationality,
             });
 
             return await data.ToArrayAsync();
@@ -44,12 +63,35 @@ namespace HiMVC.Models.Repository
                 .Select(p => new Student()
                 {
                     StudentId = p.StudentId,
-                    Name = p.Name,
-                    Age = p.Age,
+                    FirstName = p.FirstName,
+                    DateOfBirth = p.DateOfBirth,
                     Sex = p.Sex
                 }).SingleOrDefaultAsync();
 
             return await data;
+        }
+
+        public void UpdateStudent(Student student)
+        {
+
+            if (student.StudentId == 0)
+                // persist student
+                _context.Students.Add(student);
+            else
+            {
+                var stud = _context.Students.Where(s => s.StudentId == student.StudentId).SingleOrDefault();
+
+                // pass data
+                stud.FirstName = student.FirstName;
+                stud.LastName = stud.LastName;
+                stud.DateOfBirth = student.DateOfBirth;
+                stud.Sex = student.Sex;
+                stud.Email = student.Email;
+                stud.GPA = student.GPA;
+                stud.Nationality = student.Nationality;
+            }
+
+            _context.SaveChanges();
         }
 
         public async Task UpdateStudentAsync(Student student)
@@ -63,8 +105,8 @@ namespace HiMVC.Models.Repository
                 var stud = _context.Students.Where(s => s.StudentId == student.StudentId).SingleOrDefault();
 
                 // pass data
-                stud.Name = student.Name;
-                stud.Age = student.Age;
+                stud.FirstName = student.FirstName;
+                stud.DateOfBirth = student.DateOfBirth;
                 stud.Sex = student.Sex;
                 //stud.Email = student.Email;
             }    

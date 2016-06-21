@@ -14,14 +14,46 @@ namespace HiMVC.Models.Domain
         [DatabaseGenerated(DatabaseGeneratedOption.Identity)]
         public int StudentId { get; set; }
 
-        public string Name { get; set; }
+        public string FirstName { get; set; }
 
-        public int Age { get; set; }
+        public string LastName { get; set; }
 
-        public string Sex { get; set; }
+        public DateTime DateOfBirth { get; set; }
 
+        [Column("Sex")]
+        public string SexString {
+            get { return Sex.ToString(); }
+            private set { Sex = value.ParseEnum<Sex>(); }
+        }
 
-        public List<Course> Courses { get; set; }
+        [NotMapped]
+        public Sex Sex { get; set; }
 
+        public string Email { get; set; }
+
+        public float GPA { get; set; }
+
+        public string Nationality { get; set; }
+
+        public Lecturer Lecturer { get; set; }
+
+        public IEnumerable<Course> Courses { get; set; }
+
+        public IEnumerable<Book> RecommendedBook { get; set; }
+
+    }
+
+    public static class StringExtensions
+    {
+        public static T ParseEnum<T>(this string value)
+        {
+            return (T)Enum.Parse(typeof(T), value, true);
+        }
+    }
+
+    public enum Sex
+    {
+        Male,
+        Female
     }
 }

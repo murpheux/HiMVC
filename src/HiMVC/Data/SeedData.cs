@@ -24,24 +24,15 @@ namespace HiMVC.Data
                 }
 
                 context.Students.AddRange(
-                    new Student()
-                    {
-                        Name = "Clement Onawole",
-                        Age = 25,
-                        Sex = "M"
-                    },
-                    new Student()
-                    {
-                        Name = "Amina Gboro",
-                        Age = 23,
-                        Sex = "F"
-                    },
-                    new Student()
-                    {
-                        Name = "Seun Arije",
-                        Age = 45,
-                        Sex = "M"
-                    });
+                    new Student() { FirstName = "Clement", LastName = "Onawole", Email = "dapo.onawole@gmail.com", DateOfBirth = new DateTime(1975, 12, 28), Sex = Sex.Male, Nationality = "Pakistan", GPA = 3.5f },
+                    new Student() { FirstName = "Amina", LastName = "Gboro", Email = "amina.gboro@gmail.com", DateOfBirth = new DateTime(1974, 06, 02), Sex = Sex.Female, Nationality = "Bahrain", GPA = 2.7f },
+                    new Student() { FirstName = "Seun", LastName = "Arije", Email = "seun.arije@yahoo.com", DateOfBirth = new DateTime(1972, 8, 16), Sex = Sex.Male, Nationality = "India", GPA = 3.2f },
+                    new Student() { FirstName = "Amena", LastName = "Umeana", Email = "amena@yahoo.com", DateOfBirth = new DateTime(1972, 8, 16), Sex = Sex.Female, Nationality = "Pakistan", GPA = 4.2f },
+                    new Student() { FirstName = "Lola", LastName = "Popoola", Email = "lola.popoola@yahoo.com", DateOfBirth = new DateTime(1972, 8, 16), Sex = Sex.Female, Nationality = "Germany", GPA = 2.2f },
+                    new Student() { FirstName = "Sola", LastName = "Sobande", Email = "sola.soband@gmail.com", DateOfBirth = new DateTime(1972, 8, 16), Sex = Sex.Male, Nationality = "Pakistan", GPA = 1.8f },
+                    new Student() { FirstName = "Jide", LastName = "Ariyibi", Email = "jariyibi@email.com", DateOfBirth = new DateTime(1972, 8, 16), Sex = Sex.Female, Nationality = "India", GPA = 3.2f },
+                    new Student() { FirstName = "Bukola", LastName = "George", Email = "b.george@yahoo.com", DateOfBirth = new DateTime(1972, 8, 16), Sex = Sex.Female, Nationality = "Pakistan", GPA = 4.5f },
+                    new Student() { FirstName = "Seun", LastName = "Opanuga", Email = "seun.opanuga@yahoo.com", DateOfBirth = new DateTime(1972, 8, 16), Sex = Sex.Male, Nationality = "France", GPA = 3.4f });
 
                 context.SaveChanges();
             }

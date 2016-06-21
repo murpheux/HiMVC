@@ -10,8 +10,12 @@ namespace HiMVC.Models.Interfaces
 
         Task<IEnumerable<Student>> GetAllStudentsAsync();
 
+        void UpdateStudent(Student student);
+
         Task UpdateStudentAsync(Student student);
 
         void DeleteStudentAsync(int studentId);
+
+        Task<IEnumerable<Lecturer>> GetAllLecturersAsync();
     }
 }

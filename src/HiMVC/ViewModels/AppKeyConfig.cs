@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 
-namespace HiMVC.Models
+namespace HiMVC.ViewModels
 {
     public class AppKeyConfig
     {

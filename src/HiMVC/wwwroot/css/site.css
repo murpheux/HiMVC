@@ -32,3 +32,8 @@ textarea {
         z-index: 10 !important;
     }
 }
+
+dl.dl-horizontal .medalstar {
+    width: 20px;
+    height: 20px;
+}

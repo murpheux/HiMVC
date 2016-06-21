@@ -9,7 +9,7 @@ using Microsoft.Extensions.Logging;
 using HiMVC.Models;
 using HiMVC.Services;
 using AutoMapper;
-using NonFactors.Mvc.Grid;
+//using NonFactors.Mvc.Grid;
 using Microsoft.AspNet.Mvc;
 using SimpleInjector;
 using SimpleInjector.Integration.Web.Mvc;
@@ -18,6 +18,7 @@ using HiMVC.ViewModels;
 using HiMVC.Models.Interfaces;
 using HiMVC.Models.Repository;
 using HiMVC.Data;
+using System;
 //using Microsoft.AspNetCore.Mvc.Formatters.Xml;
 
 namespace HiMVC
@@ -32,11 +33,17 @@ namespace HiMVC
             var config = new MapperConfiguration(cfg =>
             {
                 cfg.CreateMap<Student, StudentModel>()
-                    .ForMember(dest => dest.NewName, opt => opt.MapFrom(src => $"Mr. {src.Name}"))
-                    .ForMember(dest => dest.Age, opt => opt.MapFrom(src => src.Age - 5));
+                    .ForMember(dest => dest.FName, opt => opt.MapFrom(src => $"{src.FirstName}"))
+                    .ForMember(dest => dest.LName, opt => opt.MapFrom(src => $"{src.LastName}"))
+                    .ForMember(dest => dest.Lecturer, opt => opt.MapFrom(src => src.Lecturer.Abbreviated))
+                    .ForMember(dest => dest.Sex, opt => opt.MapFrom(src => Enum.GetName( typeof(Sex), src.Sex)))
+                    .ForMember(dest => dest.Age, opt => opt.MapFrom(src => DateTime.Today.Year - src.DateOfBirth.Year));
 
                 cfg.CreateMap<StudentModel, Student>()
-                    .ForMember(dest => dest.Name, opt => opt.MapFrom(src => src.NewName));
+                    .ForMember(dest => dest.FirstName, opt => opt.MapFrom(src => src.FName))
+                    .ForMember(dest => dest.LastName, opt => opt.MapFrom(src => src.LName))
+                    .ForMember(dest => dest.Lecturer, opt => opt.Ignore())
+                    .ForMember(dest => dest.Sex, opt => opt.MapFrom(src => Enum.Parse(typeof(Sex), src.Sex)));
                 //cfg.AddProfile<FooProfile>();
             });
 
@@ -107,7 +114,7 @@ namespace HiMVC
                 .AddDefaultTokenProviders();
 
             services.AddMvc();
-            services.AddMvcGrid();
+            //services.AddMvcGrid();
 
 
             //configure MVC - mine

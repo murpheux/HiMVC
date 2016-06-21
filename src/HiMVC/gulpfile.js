@@ -3,6 +3,8 @@
 
 var gulp = require("gulp"),
     rimraf = require("rimraf"),
+    less = require("gulp-less"),
+    sass = require("gulp-sass"),
     concat = require("gulp-concat"),
     cssmin = require("gulp-cssmin"),
     uglify = require("gulp-uglify");
@@ -43,3 +45,29 @@ gulp.task("min:css", function () {
 });
 
 gulp.task("min", ["min:js", "min:css"]);
+
+gulp.task("less", function () {
+    return gulp.src('Styles/main.less')
+      .pipe(less())
+      .pipe(gulp.dest(paths.webroot + '/css'));
+});
+
+gulp.task("sass", function () {
+    return gulp.src('Styles/main2.scss')
+      .pipe(sass())
+      .pipe(gulp.dest(paths.webroot + '/css'));
+});
+
+gulp.task("first", function () {
+    console.log('first task! <-----');
+});
+
+gulp.task("series:first", function () {
+    console.log('first task! <-----');
+});
+
+gulp.task("series:second", ["series:first"], function () {
+    console.log('second task! <-----');
+});
+
+gulp.task("series", ["series:first", "series:second"], function () { });

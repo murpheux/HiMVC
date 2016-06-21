@@ -14,6 +14,8 @@ using ServiceStack.Redis;
 using HiMVC.Models.Interfaces;
 using HiMVC.ViewModels;
 using HiMVC.Models.Domain;
+using System.Collections;
+using Microsoft.AspNet.Mvc.Rendering;
 
 namespace HiMVC.Controllers
 {
@@ -39,7 +41,7 @@ namespace HiMVC.Controllers
 
         public IActionResult About()
         {
-            ViewBag.Message = "About Us";
+            ViewBag.Message = "About Studential";
             ViewData["Message"] = "Lorem Ipsum.";
 
             return View();
@@ -47,7 +49,7 @@ namespace HiMVC.Controllers
 
         public IActionResult Contact()
         {
-            ViewData["Message"] = "Your contact page.";
+            ViewData["Message"] = "Contact Studential";
 
             return View();
         }
@@ -63,21 +65,22 @@ namespace HiMVC.Controllers
         [AllowAnonymous]
         public IActionResult Student()
         {
-            ViewBag.Country = "CA";
+            var lecturers = _repository.GetAllLecturersAsync().Result;
+            ViewBag.Lecturers = lecturers.Select(p => new SelectListItem { Value = p.LecturerId.ToString(), Text = p.Abbreviated });
 
             return View();
         }
 
         [HttpPost("[action]")]
         [ValidateAntiForgeryToken]
-        public ActionResult Student(StudentModel studentModel)
+        public async Task<ActionResult> Student(StudentModel studentModel)
         {
             if (ModelState.IsValid)
             {
                 var mapper = MappingConfig.mapperConfig.CreateMapper();
                 var student = mapper.Map<StudentModel, Student>(studentModel);
 
-                _repository.UpdateStudentAsync(student);
+                await _repository.UpdateStudentAsync(student);
 
                 return RedirectToAction("StudentList");
             }
@@ -156,6 +159,12 @@ namespace HiMVC.Controllers
                 return HttpNotFound();
             }
             //return View(student);
+            return View();
+        }
+
+        public IActionResult ShowMap(string country = "Canada")
+        {
+
             return View();
         }
 

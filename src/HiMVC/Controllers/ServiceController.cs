@@ -4,8 +4,8 @@ using System.Linq;
 using BellagioService.Library;
 using Newtonsoft.Json;
 using Microsoft.AspNet.Mvc;
-using BellagioService.Service.v1.Models;
 using HiMVC.Controllers;
+using HiMVC.ViewModels;
 
 namespace BellagioService.Service.v1.Controllers
 {

@@ -1,4 +1,4 @@
-@model HiMVC.ViewModels.Domain.StudentModel
+@model HiMVC.ViewModels.StudentModel
 
 @{
     ViewData["Title"] = "ViewStudent";
@@ -7,26 +7,43 @@
 <h2>ViewStudent</h2>
 
 <div>
-    <h4>StudentModel</h4>
+    <h4>View Student</h4>
     <hr />
+    <h2>:::::::::::::::::: @Model.FName @Model.LName</h2>
     <dl class="dl-horizontal">
         <dt>
-            @Html.DisplayNameFor(model => model.Age)
+            @Html.DisplayNameFor(model => model.Email):
         </dt>
         <dd>
-            @Html.DisplayFor(model => model.Age)
+            @Html.DisplayFor(model => model.Email)
         </dd>
         <dt>
-            @Html.DisplayNameFor(model => model.NewName)
+            @Html.DisplayNameFor(model => model.Age):
         </dt>
         <dd>
-            @Html.DisplayFor(model => model.NewName)
+            @Html.DisplayFor(model => model.Age) yrs
         </dd>
+
         <dt>
-            @Html.DisplayNameFor(model => model.Sex)
+            @Html.DisplayNameFor(model => model.Sex):
         </dt>
         <dd>
             @Html.DisplayFor(model => model.Sex)
+        </dd>
+        <dt>
+            @Html.DisplayNameFor(model => model.GPA):
+        </dt>
+        <dd>
+            @*@Html.DisplayFor(model => model.GPA)*@
+            @for (int x = 0; x < Model.GPA; x++) {
+            <img alt="star" src="~/images/gold-starx.jpg" class="medalstar" />
+            }
+        </dd>
+        <dt>
+            @Html.DisplayNameFor(model => model.Nationality):
+        </dt>
+        <dd>
+            @Html.DisplayFor(model => model.Nationality)
         </dd>
     </dl>
 </div>

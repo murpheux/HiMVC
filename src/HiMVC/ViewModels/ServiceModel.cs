@@ -1,6 +1,7 @@
 ﻿using System.Text;
 
-namespace BellagioService.Service.v1.Models {
+namespace HiMVC.ViewModels
+{
     public class EntryModelX {
         public string OperatorId { get; set; }
 

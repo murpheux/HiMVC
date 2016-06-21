@@ -1,0 +1,24 @@
+{
+  "name": "hammerjs",
+  "version": "1.1.0",
+  "main": "hammer.js",
+  "ignore": [
+    "tests",
+    "Gruntfile.coffee",
+    "component.json",
+    "package.json",
+    "docs",
+    "misc",
+    "src"
+  ],
+  "homepage": "https://github.com/hammerjs/hammer.js",
+  "_release": "1.1.0",
+  "_resolution": {
+    "type": "version",
+    "tag": "1.1.0",
+    "commit": "9841158627048b1e4167bad4eb617bc991e11a3d"
+  },
+  "_source": "https://github.com/hammerjs/hammer.js.git",
+  "_target": "1.1.0",
+  "_originalSource": "hammer.js"
+}

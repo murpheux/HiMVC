@@ -13,8 +13,8 @@ namespace HiMVC.ViewModels.Attributes
         {
             var student = (StudentModel)validationContext.ObjectInstance;
 
-            if ((student.Sex == "M" ||
-                    student.Sex == "F"))
+            if ((student.Sex == "Male" ||
+                    student.Sex == "Female"))
             {
                 return ValidationResult.Success;
             }

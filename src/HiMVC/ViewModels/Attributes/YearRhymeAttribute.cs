@@ -12,12 +12,12 @@ namespace HiMVC.ViewModels
 
         protected override ValidationResult IsValid(object value, ValidationContext validationContext)
         {
-            var student = (StudentModel)validationContext.ObjectInstance;
-            int yearOfBirth = student.YearOfBirth;
+            //var student = (StudentModel)validationContext.ObjectInstance;
+            //int yearOfBirth = student.YearOfBirth;
 
-            if ((DateTime.Now.Year - yearOfBirth) != student.Age)
-                return new ValidationResult(
-                        "Year of birth must ryhme with 'Age' provided");
+            //if ((DateTime.Now.Year - yearOfBirth) != student.Age)
+            //    return new ValidationResult(
+            //            "Year of birth must ryhme with 'Age' provided");
 
             return ValidationResult.Success;
 

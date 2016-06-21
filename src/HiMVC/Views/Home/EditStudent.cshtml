@@ -1,4 +1,4 @@
-@model HiMVC.ViewModels.Domain.StudentModel
+@model HiMVC.ViewModels.StudentModel
 
 @{
     ViewData["Title"] = "EditStudent";
@@ -20,10 +20,10 @@
             </div>
         </div>
         <div class="form-group">
-            <label asp-for="NewName" class="col-md-2 control-label"></label>
+            <label asp-for="FName" class="col-md-2 control-label"></label>
             <div class="col-md-10">
-                <input asp-for="NewName" class="form-control" />
-                <span asp-validation-for="NewName" class="text-danger" />
+                <input asp-for="FName" class="form-control" />
+                <span asp-validation-for="FName" class="text-danger" />
             </div>
         </div>
         <div class="form-group">

@@ -6,6 +6,9 @@
     "jquery": "2.1.4",
     "jquery-validation": "1.14.0",
     "jquery-validation-unobtrusive": "3.2.4",
-    "jqueri-ui": "1.11.4"
+    "jqueri-ui": "1.11.4",
+    "knockout": "3.4.0",
+    "hammer.js": "1.1.0",
+    "font-awesome": "4.6.3"
   }
 }

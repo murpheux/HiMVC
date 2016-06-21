@@ -6,14 +6,9 @@
   },
 
   "dependencies": {
-    "angularjs": "1.5.6",
     "AutoMapper": "4.2.1",
-    "elmah.corelibrary": "1.2.2",
-    "Elmah.Mvc": "2.1.2",
     "EntityFramework.Commands": "7.0.0-rc1-final",
     "EntityFramework.MicrosoftSqlServer": "7.0.0-rc1-final",
-    "HiMVCDomain": "1.0.0-*",
-    "jQuery": "2.2.3",
     "Microsoft.ApplicationInsights.AspNet": "1.0.0-rc1",
     "Microsoft.AspNet.Authentication.Cookies": "1.0.0-rc1-final",
     "Microsoft.AspNet.Diagnostics.Entity": "7.0.0-rc1-final",
@@ -34,7 +29,7 @@
     "Microsoft.Extensions.Logging.Debug": "1.0.0-rc1-final",
     "Microsoft.VisualStudio.Web.BrowserLink.Loader": "14.0.0-rc1-final",
     "mongocsharpdriver": "2.2.4",
-    "NonFactors.Grid.Mvc6": "0.9.0-rc1-final",
+    "NLog": "4.3.5",
     "ServiceStack.Redis": "4.0.60",
     "SimpleInjector": "3.1.5",
     "SimpleInjector.Integration.Web": "3.1.5",
